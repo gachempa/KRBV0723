@@ -15,17 +15,22 @@ stockBought = False # bool to track buy iteration step
 
 for x in range(len_stockDailyPrices):
     if stockBought:
-        if stockDailyPrices[x]>=sell_price:
-            sell_price=stockDailyPrices[x]
+        if x<len_stockDailyPrices-1 and stockDailyPrices[x]<=stockDailyPrices[x+1]:
+           sell_price=stockDailyPrices[x]
         else:
+            sell_price=stockDailyPrices[x]              
             this_trade=[trade_counter,buy_price,sell_price,sell_price-buy_price]
             all_trades.append(this_trade)
+              
             trade_counter=trade_counter+1
             stockBought=False
     else:
-        buy_price=stockDailyPrices[x]
-        sell_price=stockDailyPrices[x]
-        stockBought=True
+        if stockDailyPrices[x]>=stockDailyPrices[x+1]:
+            continue
+        else:
+            buy_price=stockDailyPrices[x]
+            sell_price=stockDailyPrices[x]
+            stockBought=True
 
 print("Daily price of stock = ", stockDailyPrices)
 print("Length of stockDailyPrices = ", len_stockDailyPrices)
