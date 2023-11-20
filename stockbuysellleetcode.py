@@ -8,10 +8,24 @@ numberOfTrades = 2
 # the size of the list or number of values provided 
 len_stockDailyPrices = len(stockDailyPrices)
 
-# the list[list] to store [buy_counter, all_trades, buy_price, sell_price, profit]
+# all_trades is the list[list] to store [trade_counter, buy_price, sell_price, profit]
+all_trades=[] # list to store all possible trades
+trade_counter=0  # counter to track buy-sell sequence
+stockBought = False # bool to track buy iteration step
 
-buy_counter=0  # counter to track buy sequence
-all_trades=0 # counter to track number of possible trades
+for x in range(len_stockDailyPrices):
+    if stockBought:
+        if stockDailyPrices[x]>=sell_price:
+            sell_price=stockDailyPrices[x]
+        else:
+            this_trade=[trade_counter,buy_price,sell_price,sell_price-buy_price]
+            all_trades.append(this_trade)
+            trade_counter=trade_counter+1
+    else:
+        buy_price=stockDailyPrices[x]
+        sell_price=stockDailyPrices[x]
+        stockBought=True
 
 print("Daily price of stock = ", stockDailyPrices)
 print("Length of stockDailyPrices = ", len_stockDailyPrices)
+print("Value of all_Trades = ", all_trades)
