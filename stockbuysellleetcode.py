@@ -21,6 +21,7 @@ for x in range(len_stockDailyPrices):
             this_trade=[trade_counter,buy_price,sell_price,sell_price-buy_price]
             all_trades.append(this_trade)
             trade_counter=trade_counter+1
+            stockBought=False
     else:
         buy_price=stockDailyPrices[x]
         sell_price=stockDailyPrices[x]
