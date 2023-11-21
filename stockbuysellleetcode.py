@@ -34,4 +34,10 @@ for x in range(len_stockDailyPrices):
 
 print("Daily price of stock = ", stockDailyPrices)
 print("Length of stockDailyPrices = ", len_stockDailyPrices)
-print("Value of all_Trades = ", all_trades)
+print("Value of all_Trades (before collpsing) = ", all_trades)
+
+# program below is to collapse the output down to problem's allowed trades
+
+for x in range(len(all_trades)):
+    if x+1<len(all_trades) and all_trades[x][2]<=all_trades[(x+1)][2]:
+        print("for trade", x+1, ":", "sell price not higher than next trade")
