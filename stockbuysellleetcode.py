@@ -1,3 +1,4 @@
+import numpy
 
 # input list of stock prices, and number of trades allowed 
 # for iniital testing
@@ -42,9 +43,17 @@ collapsible_trades=[]
 for x in range(len(all_trades)):
     # two trades can be combined if buy1<=buy2 and sell1<sell2
     if x+1<len(all_trades) and all_trades[x][1]<=all_trades[(x+1)][1] and all_trades[x][2]<all_trades[(x+1)][2]:
-        print("Trades", x, "and", x+1, "can be collapsed if needed")
+    #    print("Trades", x, "and", x+1, "can be collapsed if needed")
         valueCreatedOnCollapse=(all_trades[x+1][2]-all_trades[x][1]-(all_trades[x][3]+all_trades[x+1][3]))
         thisTradeValue=[x,x+1,valueCreatedOnCollapse]
-        print("Collapsible trade:",thisTradeValue)
-    # elif (all_trades[(x+1)][2]-all_trades[x][1])>(all_trades[(x+1)][3]+all_trades[x][3]):
-    #     print("")
+        collapsible_trades.append(thisTradeValue)
+print("Collapsible trades:",collapsible_trades)
+
+# which step to remove? find the "minimum-loss" from the two lists, compare and remove the smaller loss
+min_all_trades=min(all_trades, key=lambda x: x[3])
+print("The minimum for all_trades is at",min_all_trades)
+
+min_collapsible_trades=min(collapsible_trades, key=lambda x: x[2])
+print("The minimum for collapsible_trades is at",min_collapsible_trades)
+#print(min(lst, key=lambda x: x[0]))
+
