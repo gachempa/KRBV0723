@@ -61,7 +61,7 @@ if len_trades_to_remove>0:
         min_all_trades=min(all_trades, key=lambda x: x[3])
         print("The minimum for all_trades is at",min_all_trades)
 
-        if min_collapsible_trades>0:
+        if len(collapsible_trades)>0:
             # the minimum loss consolidation 
             min_collapsible_trades=min(collapsible_trades, key=lambda x: x[2])
             print("The minimum for collapsible_trades is at",min_collapsible_trades)
@@ -74,9 +74,11 @@ if len_trades_to_remove>0:
                 # collapse the min trade[tradeindex1,tradeindex2,value]; change sell price for 1st ste, change profit, remove 2nd
                 # new sell price, new profit for consolidated trade
                 trade_counter=min_collapsible_trades[0]
-                sell_price=all_trades[(min_collapsible_trades[1])],[2]
-                all_trades[trade_counter][2]=sell_price
-                all_trades[trade_counter][3]=all_trades[trade_counter][2]-all_trades[trade_counter][1]
+                sell_price=all_trades[(min_collapsible_trades[1])][2]
+                buy_price=all_trades[trade_counter][1]
+                profit=sell_price-buy_price
+                # all_trades[trade_counter][2]=sell_price
+                all_trades[trade_counter][3]= profit # (all_trades[trade_counter][2])-(all_trades[trade_counter][1])
             else:
                 # add to index to remove later
                 index_trades_to_remove.append(min_all_trades[0])
