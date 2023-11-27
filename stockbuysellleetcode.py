@@ -37,70 +37,131 @@ print("Daily price of stock = ", stockDailyPrices)
 print("Length of stockDailyPrices = ", len_stockDailyPrices)
 print("all_Trades (before collpsing) = ", all_trades)
 
-# use maxplus_... to replace profit of trades to be deleted later (net few "codes")
-maxplus_all_trades=max(all_trades, key=lambda x: x[2])[2]*10000
-# the higher artificial profit will prevent trades from being picked up as minimums (later)
-print("The max+1 of sell prices is:",maxplus_all_trades)
-
-# program below is to collapse the output down to problem's allowed trades
-# capture 1st trade index, value created or lost
-collapsible_trades=[]
-for x in range(len(all_trades)):
-    # two trades can be combined if buy1<buy2 and sell1<sell2
-    if x+1<len(all_trades) and all_trades[x][1]<all_trades[(x+1)][1] and all_trades[x][2]<all_trades[(x+1)][2]:
-    #    print("Trades", x, "and", x+1, "can be collapsed if needed")
-        valueOnCollapse=(all_trades[x][3]+all_trades[x+1][3])-(all_trades[x+1][2]-all_trades[x][1])
-        thisTradeValue=[x,x+1,valueOnCollapse]
-        collapsible_trades.append(thisTradeValue)
-print("Collapsible trades:",collapsible_trades)
-
-# we have to remove trades if allowed trades is smaller than all possible trades
-index_trades_to_remove=[] # to collect indices to remove in final step
 len_trades_to_remove=len(all_trades)-numberOfTrades
 print("Trades to remove =",len_trades_to_remove)
-        
+
+# function to return trade with minimum profit
+def min_profit_trade(all_trades):
+    min_all_trades=min(all_trades, key=lambda x: x[3])
+    print("The minimum for all_trades is at",min_all_trades)
+    return(min_all_trades)
+
+# function to return collapsible_trades with "minimum loss of profit" when collapsing-trades
+def min_profit_collapsible_Trades(all_trades):
+    for x in range(len(all_trades)):
+        collapsible_trades=[]
+        # two trades can be combined if buy1<buy2 and sell1<sell2
+        if x+1<len(all_trades) and all_trades[x][1]<all_trades[(x+1)][1] and all_trades[x][2]<all_trades[(x+1)][2]:
+        #    print("Trades", x, "and", x+1, "can be collapsed if needed")
+            valueOnCollapse=(all_trades[x][3]+all_trades[x+1][3])-(all_trades[x+1][2]-all_trades[x][1])
+            thisTradeValue=[x,x+1,valueOnCollapse]
+            collapsible_trades.append(thisTradeValue)
+    print("Collapsible trades:",collapsible_trades)
+    min_collapsible_trades=min(collapsible_trades, key=lambda x: x[2])
+    print("The minimum for collapsible_trades is at",min_collapsible_trades)
+    return(min_collapsible_trades)
+
+# function to remove trade with "minimum profit" from all_trades
+def remove_least_profit_transaction(min_all_trades, min_collapsible_trades, all_trades):
+    if min_collapsible_trades[2]<min_all_trades[3]:
+        # collapse the min trade[tradeindex1,tradeindex2,value]; change sell price for 1st ste, change profit, remove 2nd
+        # new sell price, new profit for consolidated trade
+        trade_counter=min_collapsible_trades[0]
+        sell_price=all_trades[(min_collapsible_trades[1])][2]
+        buy_price=all_trades[trade_counter][1]
+        profit=sell_price-buy_price
+        # assing new sell price to collapsed trade first, second will be deleted later
+        all_trades[trade_counter][2]=sell_price
+        all_trades[trade_counter][3]= profit # (all_trades[trade_counter][2])-(all_trades[trade_counter][1])
+        # add the 2nd collapsible_trade to remove it later from all_trades list 
+        index_trades_to_remove=(min_collapsible_trades[1])
+        print("removing collapsible trade from all_trades (index):",index_trades_to_remove)
+        # remove the collapsed trade from the collapsible list
+        all_trades.pop(index_trades_to_remove)
+        print("all_trades after removing (2nd) collapsible trade:", all_trades)
+        return all_trades
+
+    else:
+        index_trades_to_remove = (min_all_trades[0])
+        all_trades.pop(index_trades_to_remove)
+        print("all_trades after removing min_all_trades:", all_trades)
+        return all_trades
+
 if len_trades_to_remove>0:
     for x in range(len_trades_to_remove):
-        # which step to remove? find the "minimum-loss" from the two lists, compare and remove the smaller loss
-        # the minimum loss trade in all_trades possible
-        min_all_trades=min(all_trades, key=lambda x: x[3])
-        print("The minimum for all_trades is at",min_all_trades)
+        min_all_trades=min_profit_trade(all_trades)
+        min_collapsible_trades=min_profit_collapsible_Trades(all_trades)
+        all_trades=remove_least_profit_transaction(min_all_trades,min_collapsible_trades,all_trades)
 
-        if len(collapsible_trades)>0:
-            # the minimum loss consolidation 
-            min_collapsible_trades=min(collapsible_trades, key=lambda x: x[2])
-            print("The minimum for collapsible_trades is at",min_collapsible_trades)
+print("Final trade list:", all_trades)
+
+
+# # use maxplus_... to replace profit of trades to be deleted later (net few "codes")
+# maxplus_all_trades=max(all_trades, key=lambda x: x[2])[2]*10000
+# # the higher artificial profit will prevent trades from being picked up as minimums (later)
+# print("The max+1 of sell prices is:",maxplus_all_trades)
+
+# # program below is to collapse the output down to problem's allowed trades
+# # capture 1st trade index, value created or lost
+# collapsible_trades=[]
+# for x in range(len(all_trades)):
+#     # two trades can be combined if buy1<buy2 and sell1<sell2
+#     if x+1<len(all_trades) and all_trades[x][1]<all_trades[(x+1)][1] and all_trades[x][2]<all_trades[(x+1)][2]:
+#     #    print("Trades", x, "and", x+1, "can be collapsed if needed")
+#         valueOnCollapse=(all_trades[x][3]+all_trades[x+1][3])-(all_trades[x+1][2]-all_trades[x][1])
+#         thisTradeValue=[x,x+1,valueOnCollapse]
+#         collapsible_trades.append(thisTradeValue)
+# print("Collapsible trades:",collapsible_trades)
+
+# # we have to remove trades if allowed trades is smaller than all possible trades
+# index_trades_to_remove=[] # to collect indices to remove in final step
+# len_trades_to_remove=len(all_trades)-numberOfTrades
+# print("Trades to remove =",len_trades_to_remove)
         
-            if min_collapsible_trades[2]<min_all_trades[3]:
-                # collapse the min trade[tradeindex1,tradeindex2,value]; change sell price for 1st ste, change profit, remove 2nd
-                # new sell price, new profit for consolidated trade
-                trade_counter=min_collapsible_trades[0]
-                sell_price=all_trades[(min_collapsible_trades[1])][2]
-                buy_price=all_trades[trade_counter][1]
-                profit=sell_price-buy_price
-                # assing new sell price to collapsed trade first, second will be deleted later
-                all_trades[trade_counter][2]=sell_price
-                all_trades[trade_counter][3]= profit # (all_trades[trade_counter][2])-(all_trades[trade_counter][1])
-                # add the 2nd collapsible_trade to remove it later from all_trades list 
-                index_trades_to_remove.append(min_collapsible_trades[1])
-                print("removing collapsible trade:",min_collapsible_trades)
-                # remove the collapsed trade from the collapsible list
-                print("all_trades to remove is at x[1] of:", min_collapsible_trades)
-                # set profit of remove-trade to max+1 (trade will be removed later from all_trade list)
-                # this will remove it from future considerations in this loop
-                all_trades[(min_collapsible_trades[1])][3] = maxplus_all_trades
-                print("The collapsed trade - with maxplus value",all_trades[(min_collapsible_trades[1])])
-                all_trades.pop(collapsible_trades.index(min_collapsible_trades))
-                # remove the collapsed trade from the collapsible list                
-                collapsible_trades.pop(collapsible_trades.index(min_collapsible_trades))
-            else:
-                # add to index to remove later
-                index_trades_to_remove.append(min_all_trades[0])
-                all_trades.pop(all_trades.index(min_all_trades))
+# if len_trades_to_remove>0:
+#     for x in range(len_trades_to_remove):
+#         # which step to remove? find the "minimum-loss" from the two lists, compare and remove the smaller loss
+#         # the minimum loss trade in all_trades possible
+#         min_all_trades=min(all_trades, key=lambda x: x[3])
+#         print("The minimum for all_trades is at",min_all_trades)
+
+#         if len(collapsible_trades)>0:
+#             # the minimum loss consolidation 
+#             min_collapsible_trades=min(collapsible_trades, key=lambda x: x[2])
+#             print("The minimum for collapsible_trades is at",min_collapsible_trades)
+        
+#             if min_collapsible_trades[2]<min_all_trades[3]:
+#                 # collapse the min trade[tradeindex1,tradeindex2,value]; change sell price for 1st ste, change profit, remove 2nd
+#                 # new sell price, new profit for consolidated trade
+#                 trade_counter=min_collapsible_trades[0]
+#                 sell_price=all_trades[(min_collapsible_trades[1])][2]
+#                 buy_price=all_trades[trade_counter][1]
+#                 profit=sell_price-buy_price
+#                 # assing new sell price to collapsed trade first, second will be deleted later
+#                 all_trades[trade_counter][2]=sell_price
+#                 all_trades[trade_counter][3]= profit # (all_trades[trade_counter][2])-(all_trades[trade_counter][1])
+#                 # add the 2nd collapsible_trade to remove it later from all_trades list 
+#                 index_trades_to_remove.append(min_collapsible_trades[1])
+#                 print("removing collapsible trade:",min_collapsible_trades)
+#                 # remove the collapsed trade from the collapsible list
+#                 print("all_trades to remove is at x[1] of:", min_collapsible_trades)
+#                 # set profit of remove-trade to max+1 (trade will be removed later from all_trade list)
+#                 # this will remove it from future considerations in this loop
+#                 all_trades[(min_collapsible_trades[1])][3] = maxplus_all_trades
+#                 print("The collapsed trade - with maxplus value",all_trades[(min_collapsible_trades[1])])
+#                 # not needed: all_trades.pop(collapsible_trades.index(min_collapsible_trades))
+#                 # remove the collapsed trade from the collapsible list                
+#                 collapsible_trades.pop(collapsible_trades.index(min_collapsible_trades))
+#             else:
+#                 # add to index to remove later
+#                 index_trades_to_remove.append(min_all_trades[0])
+#                 # change profit to maxplau so it doesn't get picked up again
+#                 # to do: all_trades[min_all_trades]
+#                 # not needed: all_trades.pop(all_trades.index(min_all_trades))
             
-print("The indices to remove from all trades:",index_trades_to_remove)
-print("The final all_trades list: ",all_trades)
-#    all_trades.pop(min_collapsible_trades[1]) # after this step, existing indices will be wrong
+# print("The indices to remove from all trades:",index_trades_to_remove)
+# print("The final all_trades list: ",all_trades)
+# #    all_trades.pop(min_collapsible_trades[1]) # after this step, existing indices will be wrong
 
 
 
