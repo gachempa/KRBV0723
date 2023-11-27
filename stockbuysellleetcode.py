@@ -52,18 +52,19 @@ def min_profit_collapsible_Trades(all_trades):
         collapsible_trades=[]
         # two trades can be combined if buy1<buy2 and sell1<sell2
         if x+1<len(all_trades) and all_trades[x][1]<all_trades[(x+1)][1] and all_trades[x][2]<all_trades[(x+1)][2]:
-        #    print("Trades", x, "and", x+1, "can be collapsed if needed")
+            print("Trades", x, "and", x+1, "can be collapsed if needed")
             valueOnCollapse=(all_trades[x][3]+all_trades[x+1][3])-(all_trades[x+1][2]-all_trades[x][1])
+            print("Value on collapse:",valueOnCollapse)
             thisTradeValue=[x,x+1,valueOnCollapse]
             collapsible_trades.append(thisTradeValue)
-    print("Collapsible trades:",collapsible_trades)
-    min_collapsible_trades=min(collapsible_trades, key=lambda x: x[2])
-    print("The minimum for collapsible_trades is at",min_collapsible_trades)
-    return(min_collapsible_trades)
+            print("Collapsible trades:",collapsible_trades)
+            min_collapsible_trades=min(collapsible_trades, key=lambda x: x[2])
+            print("The minimum for collapsible_trades is at",min_collapsible_trades)
+            return(min_collapsible_trades)
 
 # function to remove trade with "minimum profit" from all_trades
 def remove_least_profit_transaction(min_all_trades, min_collapsible_trades, all_trades):
-    if min_collapsible_trades[2]<min_all_trades[3]:
+    if (min_collapsible_trades is not None) and min_collapsible_trades[2]<min_all_trades[3]:
         # collapse the min trade[tradeindex1,tradeindex2,value]; change sell price for 1st ste, change profit, remove 2nd
         # new sell price, new profit for consolidated trade
         trade_counter=min_collapsible_trades[0]
@@ -80,7 +81,6 @@ def remove_least_profit_transaction(min_all_trades, min_collapsible_trades, all_
         all_trades.pop(index_trades_to_remove)
         print("all_trades after removing (2nd) collapsible trade:", all_trades)
         return all_trades
-
     else:
         index_trades_to_remove = (min_all_trades[0])
         all_trades.pop(index_trades_to_remove)
