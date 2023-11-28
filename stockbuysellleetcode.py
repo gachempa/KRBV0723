@@ -3,7 +3,7 @@ import numpy
 # input list of stock prices, and number of trades allowed 
 # for iniital testing
 # actual problem will use auto-inputs from source 
-stockDailyPrices = [2,3,4,5,4,3,3,5,3,6,2,4,3,5]
+stockDailyPrices = [2,3,4,5,4,3,3,5,3,6,2,4,3,5,2]
 numberOfTrades = 3
 
 # the size of the list or number of values provided 
@@ -26,7 +26,7 @@ for x in range(len_stockDailyPrices):
             trade_counter=trade_counter+1
             stockBought=False
     else:
-        if stockDailyPrices[x]>=stockDailyPrices[x+1]:
+        if x<len_stockDailyPrices-1 and stockDailyPrices[x]>=stockDailyPrices[x+1]:
             continue
         else:
             buy_price=stockDailyPrices[x]

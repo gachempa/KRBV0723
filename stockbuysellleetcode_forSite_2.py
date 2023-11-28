@@ -26,7 +26,7 @@ for x in range(len_stockDailyPrices):
             trade_counter=trade_counter+1
             stockBought=False
     else:
-        if stockDailyPrices[x]>=stockDailyPrices[x+1]:
+        if x<len_stockDailyPrices-1 and stockDailyPrices[x]>=stockDailyPrices[x+1]:
             continue
         else:
             buy_price=stockDailyPrices[x]
