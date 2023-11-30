@@ -4,7 +4,7 @@ import numpy
 # for iniital testing
 # actual problem will use auto-inputs from source 
 stockDailyPrices = [2,3,4,5,4,3,3,5,3,6,2,4,3,5]
-numberOfTrades = 2
+numberOfTrades = 4
 
 # the size of the list or number of values provided 
 len_stockDailyPrices = len(stockDailyPrices)

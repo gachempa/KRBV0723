@@ -4,7 +4,7 @@ import numpy
 # for iniital testing
 # actual problem will use auto-inputs from source 
 stockDailyPrices = [2,3,4,5,4,3,3,5,3,6,2,4,3,5,2]
-numberOfTrades = 3
+numberOfTrades = 4
 
 # the size of the list or number of values provided 
 len_stockDailyPrices = len(stockDailyPrices)
@@ -35,6 +35,7 @@ for x in range(len_stockDailyPrices):
 
 print("Daily price of stock = ", stockDailyPrices)
 print("Length of stockDailyPrices = ", len_stockDailyPrices)
+print("Trades allowed:",numberOfTrades)
 print("all_Trades (before collpsing) = ", all_trades)
 
 len_trades_to_remove=len(all_trades)-numberOfTrades
@@ -98,7 +99,7 @@ print("Final trade list:", all_trades)
 maximum_profit=0
 
 for x in range(len(all_trades)):
-    maximum_profit=maximum_profit+all_trades[1][3]
+    maximum_profit=maximum_profit+all_trades[x][3]
     print("max profit is:",maximum_profit)
 
 
