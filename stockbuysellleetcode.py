@@ -4,7 +4,7 @@ import numpy
 # for iniital testing
 # actual problem will use auto-inputs from source 
 stockDailyPrices = [2,3,4,5,4,3,3,5,3,6,2,4,3,5,2]
-numberOfTrades = 4
+numberOfTrades = 7
 
 # the size of the list or number of values provided 
 len_stockDailyPrices = len(stockDailyPrices)
@@ -65,6 +65,7 @@ def min_profit_collapsible_Trades(all_trades):
 
 # function to remove trade with "minimum profit" from all_trades
 def remove_least_profit_transaction(min_all_trades, min_collapsible_trades, all_trades):
+    # use this if when trades should be collapsed
     if (min_collapsible_trades is not None) and min_collapsible_trades[2]<min_all_trades[3]:
         # collapse the min trade[tradeindex1,tradeindex2,value]; change sell price for 1st ste, change profit, remove 2nd
         # new sell price, new profit for consolidated trade
@@ -83,11 +84,13 @@ def remove_least_profit_transaction(min_all_trades, min_collapsible_trades, all_
         print("all_trades after removing (2nd) collapsible trade:", all_trades)
         return all_trades
     else:
+        # use this if when trades should be deleted
         index_trades_to_remove = (min_all_trades[0])
         all_trades.pop(index_trades_to_remove)
         print("all_trades after removing min_all_trades:", all_trades)
         return all_trades
 
+# the main logic to call the functions and complete all tasks
 if len_trades_to_remove>0:
     for x in range(len_trades_to_remove):
         min_all_trades=min_profit_trade(all_trades)
@@ -98,11 +101,12 @@ print("Final trade list:", all_trades)
 
 maximum_profit=0
 
+# the final loop to get all answers
 for x in range(len(all_trades)):
     maximum_profit=maximum_profit+all_trades[x][3]
     print("max profit is:",maximum_profit)
 
-
+# ALL BELOW - was trail code, has been commented out
 # # use maxplus_... to replace profit of trades to be deleted later (net few "codes")
 # maxplus_all_trades=max(all_trades, key=lambda x: x[2])[2]*10000
 # # the higher artificial profit will prevent trades from being picked up as minimums (later)
