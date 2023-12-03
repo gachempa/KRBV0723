@@ -32,6 +32,9 @@ medical_df = pd.read_csv('medical.csv')
 # plt.show()
 
 non_smoker_df=medical_df[medical_df.smoker=='no']
+# plt.title('Age vs. Charges')
+# sns.scatterplot(data=non_smoker_df, x='age', y='charges', alpha=0.7, s=15)
+# plt.show
 
 # Convert non-nums to numerical
 smoker_values = {'no': 0, 'yes': 1}
@@ -43,14 +46,20 @@ model=LinearRegression()
 inputs=non_smoker_df[['age']]
 targets=non_smoker_df.charges
 model.fit(inputs,targets)
+print("coeff:",model.coef_)
+print("intcpt:",model.intercept_)
+
 # print(model.predict(np.array([[23],[37],[61]])))
 predictions=model.predict(inputs)
 def rmse(targets,predictions):
     return np.sqrt(np.mean(np.square(targets - predictions)))
 # print(rmse(targets,predictions))
+rmse(targets,predictions)
 
 w=model.coef_
 b=model.intercept_
+# plt.plot(model.coef_,model.intercept_,'r',alpha=0.9)
+# plt.show()
 
 def estimate_charges(age, w, b):
     return w * age + b
@@ -61,11 +70,11 @@ def try_parameters(w, b):
     predictions = estimate_charges(ages, w, b)
     
     plt.plot(ages, predictions, 'r', alpha=0.9)
-    plt.show
     plt.scatter(ages, target, s=8,alpha=0.8)
     plt.xlabel('Age')
     plt.ylabel('Charges')
     plt.legend(['Prediction', 'Actual']);
+    plt.ioff
     plt.show
     
     loss = rmse(target, predictions)
