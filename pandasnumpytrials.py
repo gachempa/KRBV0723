@@ -58,8 +58,6 @@ rmse(targets,predictions)
 
 w=model.coef_
 b=model.intercept_
-# plt.plot(model.coef_,model.intercept_,'r',alpha=0.9)
-# plt.show()
 
 def estimate_charges(age, w, b):
     return w * age + b
@@ -73,11 +71,11 @@ def try_parameters(w, b):
     plt.scatter(ages, target, s=8,alpha=0.8)
     plt.xlabel('Age')
     plt.ylabel('Charges')
-    plt.legend(['Prediction', 'Actual']);
-    plt.ioff
-    plt.show
+    plt.legend(['Prediction', 'Actual'])
+    plt.show()
     
     loss = rmse(target, predictions)
     print("RMSE Loss: ", loss)
+    # print(input("Chart Ok? Press any key to continue"))
 
 try_parameters(w,b)
