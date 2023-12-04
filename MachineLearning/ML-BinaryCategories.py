@@ -1,5 +1,6 @@
 
 import pandas as pd
+import matplotlib
 import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
@@ -7,6 +8,12 @@ import numpy as np
 
 from sklearn.linear_model import LinearRegression
 # check data-retreive.py and pandasnumpytrials.py for some basics
+
+# settign default style for charts
+sns.set_style('darkgrid')
+matplotlib.rcParams['font.size'] = 14
+matplotlib.rcParams['figure.figsize'] = (10, 6)
+matplotlib.rcParams['figure.facecolor'] = '#00000000'
 
 medical_df = pd.read_csv('medical.csv')
 
@@ -55,3 +62,6 @@ def try_parameters(w, b):
     # print(input("Chart Ok? Press any key to continue"))
 
 try_parameters(w,b)
+
+sns.barplot(data=medical_df,x='smoker',y='charges')
+plt.show()
