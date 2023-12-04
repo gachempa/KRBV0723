@@ -6,6 +6,8 @@ import seaborn as sns
 import numpy as np
 
 from sklearn.linear_model import LinearRegression
+# from sklearn import preprocessing
+# from sklearn.preprocessing import StandardScaler
 
 # Machine Learning with Python and Scikit-Learn – Full Course
 # https://www.youtube.com/watch?v=hDKCxebp88A&ab_channel=freeCodeCamp.org
