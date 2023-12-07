@@ -8,6 +8,7 @@ import numpy as np
 
 from sklearn.linear_model import LinearRegression
 from sklearn import preprocessing
+from sklearn.preprocessing import StandardScaler
 
 # settign default style for charts
 sns.set_style('darkgrid')
@@ -38,12 +39,14 @@ medical_df[['northeast', 'northwest', 'southeast', 'southwest']] = one_hot
 
 # print(medical_df)
 
+"""/"""
 model=LinearRegression()
 
 # inputs=non_smoker_df[['age','bmi','children']]
 # targets=non_smoker_df.charges
-inputs=medical_df[['age','bmi','children','smoker_code','sex_code', 
-                   'northeast', 'northwest', 'southeast', 'southwest']]
+input_cols=['age','bmi','children','smoker_code','sex_code', 
+                   'northeast', 'northwest', 'southeast', 'southwest']
+inputs=medical_df[input_cols]
 targets=medical_df.charges
 model=model.fit(inputs,targets)
 print("coeff:",model.coef_)
@@ -56,10 +59,18 @@ def rmse(targets,predictions):
 # print(rmse(targets,predictions))
 print("rmse loss =",rmse(targets,predictions))
 
-sns.barplot(data=medical_df,x='region',y='charges')
-plt.show()
+# sns.barplot(data=medical_df,x='region',y='charges')
+# plt.show()
 
 # fig = px.scatter_3d(non_smoker_df, x='age', y='bmi', z='charges')
 # fig.update_traces(marker_size=3, marker_opacity=0.5)
 # fig.show()
 
+print("coeff, intcpt:",model.coef_,model.intercept_)
+weights_df = pd.DataFrame({
+    'feature': np.append(input_cols,"Intercept"),
+    'weight': np.append(model.coef_,model.intercept_)
+})
+print(weights_df)
+
+"""/"""
