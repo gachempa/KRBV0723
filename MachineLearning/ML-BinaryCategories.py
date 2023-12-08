@@ -73,4 +73,11 @@ weights_df = pd.DataFrame({
 })
 print(weights_df)
 
+numeric_cols=['age','bmi','children']
+scaler=StandardScaler()
+scaler.fit(medical_df[numeric_cols])
+
+scaled_inputs=scaler.transform(medical_df[numeric_cols])
+
+
 """/"""
