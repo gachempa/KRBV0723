@@ -84,4 +84,25 @@ cat_cols = ['smoker_code', 'sex_code', 'northeast', 'northwest',
             'southeast', 'southwest']
 categorical_data = medical_df[cat_cols].values
 
+inputs = np.concatenate((scaled_inputs, categorical_data), axis=1)
+targets = medical_df.charges
+
+# Create and train the model
+model = LinearRegression().fit(inputs, targets)
+
+# Generate predictions
+predictions = model.predict(inputs)
+
+# Compute loss to evalute the model
+loss = rmse(targets, predictions)
+print('Loss:', loss)
+
+weights_df = pd.DataFrame({
+    'feature': np.append(numeric_cols + cat_cols, 1),
+    'weight': np.append(model.coef_, model.intercept_)
+})
+print(weights_df.sort_values('weight', ascending=False))
+
+
+
 """/"""
