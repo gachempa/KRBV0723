@@ -78,6 +78,10 @@ scaler=StandardScaler()
 scaler.fit(medical_df[numeric_cols])
 
 scaled_inputs=scaler.transform(medical_df[numeric_cols])
+print(scaled_inputs)
 
+cat_cols = ['smoker_code', 'sex_code', 'northeast', 'northwest', 
+            'southeast', 'southwest']
+categorical_data = medical_df[cat_cols].values
 
 """/"""
