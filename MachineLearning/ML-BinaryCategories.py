@@ -9,6 +9,7 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
 
 # settign default style for charts
 sns.set_style('darkgrid')
@@ -103,6 +104,23 @@ weights_df = pd.DataFrame({
 })
 print(weights_df.sort_values('weight', ascending=False))
 
+inputs_train, inputs_test, targets_train, targets_test = train_test_split(inputs, targets, test_size=0.1)
 
+# Create and train the model
+model = LinearRegression().fit(inputs_train, targets_train)
+
+# Generate predictions
+predictions_test = model.predict(inputs_test)
+
+# Compute loss to evalute the model
+loss = rmse(targets_test, predictions_test)
+print('Test Loss:', loss)
+
+# Generate predictions
+predictions_train = model.predict(inputs_train)
+
+# Compute loss to evalute the model
+loss = rmse(targets_train, predictions_train)
+print('Training Loss:', loss)
 
 """/"""
