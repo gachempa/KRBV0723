@@ -26,6 +26,7 @@ def window_from_any_index(start_index, full_string,window_for_index):
     start_from=start_index[0]
     for x in range(start_from,len(full_string)):
         print(x)
+        print(window_for_index)
 
 # fn takes the list of all possible windows, which window index to use (index, character)
 # and the window (remove the start-character then iterate and find other characters)
