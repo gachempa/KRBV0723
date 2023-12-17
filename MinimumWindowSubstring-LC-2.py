@@ -1,14 +1,16 @@
 
-s = "ADOBECODEBANC"
-t = "ABC"
+# s = "ADOBECODEBANC"
+# t = "ABC"
 
-# s="AB"
-# t="AA"
+s="ABC"
+t="BC"
 
 if len(s)<len(t) or (len(s)==len(t) and bool(s==t)==False):
     print("")
 elif s==t:
     print(s)
+elif len(t)==1 and t in s:
+    print(t)
 else:
     the_minimum_window=""
 
@@ -22,7 +24,7 @@ else:
             all_possible_windows.append(all_possible_windows_item)
             # print(count,x)
 
-    # print(all_possible_windows)
+    print(all_possible_windows)
 
     # pop an item from a string
     def pop_from_string(the_string, pop_what):
@@ -59,10 +61,10 @@ else:
         window_end=create_windows(x,all_possible_windows,all_possible_windows[x],t)
         # print("window-end is",window_end)
         if the_minimum_window=="" and window_end is not None:
-            s_start_index=x
+            s_start_index=all_possible_windows[x][0]
             s_end_index=all_possible_windows[window_end][0]
             the_minimum_window=s[s_start_index:s_end_index+1]
-            # print("min window is",the_minimum_window)
+            print("min window is",the_minimum_window)
         elif window_end is not None:
             s_start_index=all_possible_windows[x][0]
             s_end_index=all_possible_windows[window_end][0]
