@@ -1,6 +1,4 @@
 
-
-
 s = "ADOBECODEBANC"
 t = "ABC"
 
@@ -11,13 +9,12 @@ all_possible_windows=[]
 
 for count, x in enumerate(s):
     if x in t:
-        # all_possible_windows_item=[start(index,value),final(index,value),0/1]
-        # 0 is for incomplete windowa and 1 is for complete window
-        all_possible_windows_item=(count,x,count,x,0)
+        # all_possible_windows_item=[startindex,startvalue]
+        all_possible_windows_item=(count,x)
         all_possible_windows.append(all_possible_windows_item)
-        print(count,x)
+        # print(count,x)
 
-# print(all_possible_windows)
+print(all_possible_windows)
 
 # pop an item from a string
 def pop_from_string(the_string, pop_what):
@@ -28,10 +25,10 @@ def pop_from_string(the_string, pop_what):
 def window_from_any_index(start_index, full_string,window_for_index):
     for x in range(start_index+1,len(full_string)):
         if full_string[x][1] in window_for_index:
-            print("found",full_string[x][1])
+            # print("found",full_string[x][1])
             window_for_index=pop_from_string(window_for_index,full_string[x])
             if len(window_for_index) ==0:
-                print("Window found, end index",x)
+                # print("Window found, end index",x)
                 return(x)
             # print(x,full_string[x])
             # print(window_for_index)
@@ -45,13 +42,27 @@ def create_windows(x_,all_possible_windows_,which_window_index,t_):
     print(a)
 
     window_end=window_from_any_index(x_,all_possible_windows_,new_t_window)
-    print("end index returned",window_end)
-    
+    # print("end index returned",window_end)
+    return(window_end)
+
 # fn to create all possible windows list
 for x in range (len(all_possible_windows)):
-    # print(all_possible_windows[1])
-    create_windows(x,all_possible_windows,all_possible_windows[x],t)
-    
+    # this will return the end index of window
+    window_end=create_windows(x,all_possible_windows,all_possible_windows[x],t)
+    print("window-end is",window_end)
+    if the_minimum_window=="" and window_end is not None:
+        s_start_index=x
+        s_end_index=all_possible_windows[window_end][0]
+        the_minimum_window=s[s_start_index:s_end_index+1]
+        print("min window is",the_minimum_window)
+    elif window_end is not None:
+        s_start_index=all_possible_windows[x][0]
+        s_end_index=all_possible_windows[window_end][0]
+        new_window=s[s_start_index:s_end_index+1]
+        print("min window is",new_window)
+        if len(new_window)<len(the_minimum_window):
+            the_minimum_window=new_window
+            print("updated new min window is",the_minimum_window)
 
 # new_t=pop_from_string(t,all_possible_windows[1])
 # print(new_t)
