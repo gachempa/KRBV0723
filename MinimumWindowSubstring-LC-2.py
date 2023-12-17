@@ -3,9 +3,9 @@
 # t = "ABC"
 
 s="ABC"
-t="BC"
+t="CBA"
 
-if len(s)<len(t) or (len(s)==len(t) and bool(s==t)==False):
+if len(s)<len(t): #or (len(s)==len(t) and bool(s==t)==False):
     print("")
 elif s==t:
     print(s)
@@ -24,7 +24,7 @@ else:
             all_possible_windows.append(all_possible_windows_item)
             # print(count,x)
 
-    print(all_possible_windows)
+    # print(all_possible_windows)
 
     # pop an item from a string
     def pop_from_string(the_string, pop_what):
@@ -64,7 +64,7 @@ else:
             s_start_index=all_possible_windows[x][0]
             s_end_index=all_possible_windows[window_end][0]
             the_minimum_window=s[s_start_index:s_end_index+1]
-            print("min window is",the_minimum_window)
+            # print("min window is",the_minimum_window)
         elif window_end is not None:
             s_start_index=all_possible_windows[x][0]
             s_end_index=all_possible_windows[window_end][0]
