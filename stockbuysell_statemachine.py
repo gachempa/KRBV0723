@@ -1,5 +1,5 @@
 # not my programn, just learning approach
-k = 3
+k = 1
 prices = [3,2,6,5,0,3,0,3,0,3,2,5]
 
 if k == 0 : print(0)
