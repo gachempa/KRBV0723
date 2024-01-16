@@ -18,3 +18,8 @@ def sizeOfLL(self):
 		return size
 	else:
 		return 0
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
