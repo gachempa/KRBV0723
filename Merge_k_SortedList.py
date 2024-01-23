@@ -26,7 +26,7 @@ class LinkedList:
         listNode=ListNode(val,self.head)
         self.head=listNode
 
-    def print(self):
+    def gprint(self):
         if self.head is None:
             print('Linked list is empty')
             return
@@ -41,9 +41,15 @@ class LinkedList:
         print(llstr)
 
 lists=LinkedList()
+print(lists)
+print('test1')
+print(lists.gprint)
+print('test2')
 for x in range(len(given_list)):
     listfromend=given_list[len(given_list)-1-x]
     lists.insert_at_beginning(listfromend)
     print(listfromend)
 
-print(lists.print)
+print(lists.gprint)
+print('test3')
+print(lists)
