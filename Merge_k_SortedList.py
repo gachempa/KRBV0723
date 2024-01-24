@@ -26,6 +26,12 @@ class LinkedList:
         listNode=ListNode(val,self.head)
         self.head=listNode
 
+    def gprintll(self):
+        current_node=self.head
+        while(current_node):
+            print(current_node.data,'-->')
+            current_node=current_node.next
+    
     def gprint(self):
         if self.head is None:
             print('Linked list is empty')
@@ -53,3 +59,4 @@ for x in range(len(given_list)):
 print(lists.gprint)
 print('test3')
 print(lists)
+print(lists.gprintll)
