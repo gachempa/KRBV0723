@@ -1,0 +1,31 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+# code to locally test data
+# make this a linked list with name ListNode
+given_list=[[1,4,5],[1,3,4],[2,6]]
+
+class Node:
+    def __init__(self,data) -> None:
+        self.data=data
+        self.next=None
+
+class LinkedList:
+    def __init__(self,data) -> None:
+        self.header=None
+        self.tail=None
+        self.size=0
+
+    def append(self,data):
+        n=Node(data)
+        if(self.size==0):
+            self.header=n
+            self.tail=n
+        else:
+            temp=self.tail
+            self.tail=n
+            temp.next=self.tail
+        self.size+=1
