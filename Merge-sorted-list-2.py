@@ -14,7 +14,7 @@ class Node:
         self.next=None
 
 class LinkedList:
-    def __init__(self,data) -> None:
+    def __init__(self) -> None:
         self.header=None
         self.tail=None
         self.size=0
@@ -29,3 +29,19 @@ class LinkedList:
             self.tail=n
             temp.next=self.tail
         self.size+=1
+
+    def printlist(self):
+        data=""
+        current=self.header
+        while(current!=None):
+            data=data+str(current.data)+" "
+            current=current.next
+        return data
+    
+mylist=LinkedList()
+mylist.append(1)
+mylist.append(2)
+mylist.append(3)
+mylist.append(4)
+
+print(mylist.printlist())
