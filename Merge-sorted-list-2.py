@@ -27,7 +27,8 @@ class LinkedList:
         else:
             temp=self.tail
             self.tail=n
-            temp.next=self.tail
+            # temp.next=self.tail
+            temp.next=n
         self.size+=1
 
     def printlist(self):
