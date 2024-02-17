@@ -45,3 +45,12 @@ mylist.append(3)
 mylist.append(4)
 
 print(mylist.printlist())
+
+# create a dictionaly for input, list sequence: lencgth of sub-list
+dictionary_given_list={}
+
+for x in range(len(given_list)):
+    dictionary_given_list.update({x:len(given_list[x])})
+
+print(dictionary_given_list)
+
