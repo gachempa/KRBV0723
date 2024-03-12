@@ -2,9 +2,11 @@ nums1 = [4,9,5]
 nums2 = [9,4,9,8,4]
 
 # solution 1, easy and simple using intersection of sets
-s_nums1=set(nums1)
-s_nums2=set(nums2)
-result=s_nums1.intersection(s_nums2)
+# s_nums1=set(nums1)
+# s_nums2=set(nums2)
+# result=s_nums1.intersection(s_nums2)
+
+result=set(nums1).intersection(set(nums2))
 
 print(result)
 
