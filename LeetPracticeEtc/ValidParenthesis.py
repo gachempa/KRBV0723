@@ -14,6 +14,8 @@ else:
     n_opens=0 # to track count of opened parenthesis for indexing
 
     for x in range(len(s)):
+        print(f"n_opens is {n_opens}")
+        print(f"opened_parenthesis list is {opened_parenthesis}")
         if sum_curly==-1 or sum_round==-1 or sum_square==-1:
             # print("false")
             # print(x,bracket)
@@ -40,19 +42,23 @@ else:
                     opened_parenthesis.pop()
                     n_opens-=1
                     sum_square-=1
+                    print("in ] loop")
                 else:
-                    sum_square-=1
+                    sum_square=-1
             elif bracket=="{" or bracket=="}":
+                print("in { and } loop")
                 if bracket=="{":
                     sum_curly+=1
                     opened_parenthesis.append(3)
                     n_opens+=1
+                    print("in { loop")
                 elif n_opens>0 and opened_parenthesis[n_opens-1]==3:
                     opened_parenthesis.pop()
                     n_opens-=1
                     sum_curly-=1
+                    print("in } loop")
                 else:
-                    sum_curly-=1
+                    sum_curly=-1
     
 if sum_curly==0 and sum_round==0 and sum_square==0:
     print(1)
