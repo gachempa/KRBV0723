@@ -1,7 +1,11 @@
+import re
+
 haystack=str()
 needle=str()
 
-haystack = "sadbutsad"
-needle = "sad"
+haystack = "sadbutsbd"
+needle = "sbd"
 
-re.search("is", String).start()
+a=re.search(needle, haystack).start()
+
+print(a)
