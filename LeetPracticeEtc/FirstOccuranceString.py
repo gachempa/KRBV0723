@@ -4,8 +4,9 @@ haystack=str()
 needle=str()
 
 haystack = "sadbutsbd"
-needle = "sbd"
+needle = "sbde"
 
-a=re.search(needle, haystack).start()
-
-print(a)
+if re.search(needle, haystack):
+    print(re.search(needle, haystack).start())
+else: 
+    print(-1)
