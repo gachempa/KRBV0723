@@ -34,7 +34,7 @@ class LinkedList:
             # print(curr_node.val)
             if curr_node.val==curr_node.next.val:
                 curr_node.next=curr_node.next.next
-                print(curr_node.val)
+                # print(curr_node.val)
             else:
                 curr_node=curr_node.next
 
@@ -45,3 +45,5 @@ for x in reversed(head_arr):
 
 # Llist.printList()
 Llist.deleteDuplicates(Llist.head)
+
+Llist.printList()
