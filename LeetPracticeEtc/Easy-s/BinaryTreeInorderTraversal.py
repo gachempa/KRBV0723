@@ -27,8 +27,9 @@ class TreeNode:
         else:
             self.val=val
 
-root=TreeNode(12)
+root=TreeNode()
 root.insert(6)
+# root.insert(None)
 root.insert(14)
 root.insert(3)
 root.insert(15)
@@ -36,3 +37,4 @@ root.insert(8)
 root.insert(4)
 root.insert(9)
 root.PrintTree()
+print(root.left.val)
