@@ -12,8 +12,8 @@ class TreeNode:
         self.left = left
         self.right = right
 
-nums=[-10,-3,0,5,9]
-# nums=[1,2]
+# nums=[-10,-3,0,5,9]
+nums=[1]
 
 def createTree(_nums:list,_bTree):
 
@@ -22,7 +22,7 @@ def createTree(_nums:list,_bTree):
         return
     elif len(_nums)==1:
         _bTree.append(_nums[0])
-        return
+        return _bTree
     else:
         mid=int((len(_nums)+1)/2)-1
         _bTree.append(_nums[mid])
@@ -37,9 +37,10 @@ bTree=[]
 ansBST=createTree(nums,bTree)
 print(ansBST)
 
-# mid=int((len(nums)+1)/2)-1
-# left=nums[:mid]
-# right=nums[mid+1:]
-# print(nums[mid])
-# print(left)
-# print(right)
+mid=int((len(nums)+1)/2)-1
+print(mid)
+left=nums[:mid]
+right=nums[mid+1:]
+print(nums[mid])
+print(left)
+print(right)
