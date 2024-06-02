@@ -8,11 +8,11 @@ nodes =[3, 6, 8, 2, 11, None, 13,4,3,None,2,None,None,3,4,None,None,5]
   
 # Building the binary tree 
 binary_tree = build(nodes) 
-print('Binary tree from list :\n', binary_tree) 
+print('\nBinary tree from list:\n', binary_tree) 
   
 # Getting list of nodes from binarytree 
-print('\nList from binary tree :', binary_tree.values) 
+print('\nList from binary tree:\n',binary_tree.values) 
 
-print(binary_tree.max_node_value)
-print(binary_tree.height)
-print(binary_tree.max_leaf_depth)
+print('\nMax node value:',binary_tree.max_node_value)
+print('Tree height:   ',binary_tree.height)
+print('Max leaf depth:',binary_tree.max_leaf_depth,'\n')
