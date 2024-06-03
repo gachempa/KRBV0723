@@ -16,3 +16,12 @@ print('\nList from binary tree:\n',binary_tree.values)
 print('\nMax node value:',binary_tree.max_node_value)
 print('Tree height:   ',binary_tree.height)
 print('Max leaf depth:',binary_tree.max_leaf_depth,'\n')
+
+def mytest(balanceTree):
+    if balanceTree.height==0: return True
+    print(balanceTree.values[0])
+    print(balanceTree.values[1])
+
+mytest(binary_tree)
+
+
