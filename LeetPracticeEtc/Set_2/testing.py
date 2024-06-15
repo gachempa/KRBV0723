@@ -1,19 +1,27 @@
 
 s="abbcb"
-max_pdrome=""
-for i in range(len(s)*2):
-    r=i//2
-    l=(i-1)//2
-    # print(i,r,l)
 
-    while l>=0 and r<len(s) and s[l]==s[r]:
-        # print(s[-1])
-        l-=1
-        r+=1
-    pdrome=s[l+1:r]
-    max_pdrome=max_pdrome if len(max_pdrome)>len(pdrome) else pdrome
+numRows=5
 
-print(max_pdrome)
+if numRows == 1:
+    print(s)
+
+str1=[""]*numRows
+i=0
+di=1
+
+for x in s:
+    str1[i]+=x
+
+    if i==0:
+        di=1
+    if i==numRows-1:
+        di=-1
+    
+    i+=di
+
+str_res=''.join(str1)
+print(str_res)
 
 # for x in range(1):
 #     print(x)
