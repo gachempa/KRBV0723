@@ -1,27 +1,6 @@
-
-s="abbcb"
-
-numRows=5
-
-if numRows == 1:
-    print(s)
-
-str1=[""]*numRows
-i=0
-di=1
-
-for x in s:
-    str1[i]+=x
-
-    if i==0:
-        di=1
-    if i==numRows-1:
-        di=-1
-    
-    i+=di
-
-str_res=''.join(str1)
-print(str_res)
+x=-123467
+rem=x%10
+print(rem)
 
 # for x in range(1):
 #     print(x)
