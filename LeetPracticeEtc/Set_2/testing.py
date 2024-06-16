@@ -1,6 +1,9 @@
-x=-123467
-rem=x%10
-print(rem)
+x=7
+y=-7
+rem_x=x%10
+rem_y=y%10
+print(rem_x)
+print(rem_y)
 
 # for x in range(1):
 #     print(x)
